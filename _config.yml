@@ -2,8 +2,8 @@ title: Nighthawk Pages
 description: "Class of 2025"
 owner_name: Thomas Bao
 github_username: wendaobao
-github_repo: "BenCSP_2025" 
-baseurl: "/BenCSP_2025"
+github_repo: "thomasCSP_2025" 
+baseurl: "/thomasCSP_2025"
 future: true
 remote_theme: jekyll/minima
 minima:
