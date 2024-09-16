@@ -1,8 +1,12 @@
 ---
 layout: page
-title: Snake Game
+categories: [Hacks]
+title: Snake
+description:  Snake
+type: issues 
+comments: true
 permalink: /snake/
-
+hide: true
 ---
 
 <style>
@@ -13,13 +17,15 @@ permalink: /snake/
         margin-left: auto;
         margin-right: auto;
     }
-
-    canvas{
+    /* Update the background of the canvas to a darker version of the color */
+    canvas {
         display: none;
         border-style: solid;
-        border-width: 10px;
-        border-color: #FFFFFF;
+        border-width: 19px;
+        border-color: #88bc4c;
+        background-color: #4c6b2c; /* Darker version of #88bc4c */
     }
+
     canvas:focus{
         outline: none;
     }
@@ -64,7 +70,7 @@ permalink: /snake/
     }
 
     #setting input:checked + label{
-        background-color: #FFF;
+        background-color: #88bc4c;
         color: #000;
     }
 </style>
@@ -77,30 +83,34 @@ permalink: /snake/
     <div class="container bg-secondary" style="text-align:center;">
         <!-- Main Menu -->
         <div id="menu" class="py-4 text-light">
-            <p>Welcome to Snake, press <span style="background-color: #FFFFFF; color: #000000">space</span> to begin</p>
+            <p>Welcome to Snake, press <span style="background-color: #88bc4c; color: #000000">Space</span> to begin</p>
             <a id="new_game" class="link-alert">new game</a>
             <a id="setting_menu" class="link-alert">settings</a>
         </div>
         <!-- Game Over -->
         <div id="gameover" class="py-4 text-light">
-            <p>Game Over, press <span style="background-color: #FFFFFF; color: #000000">space</span> to try again</p>
+            <p>Game Over, press <span style="background-color: #88bc4c; color: #000000">space</span> to try again</p>
             <a id="new_game1" class="link-alert">new game</a>
             <a id="setting_menu1" class="link-alert">settings</a>
         </div>
         <!-- Play Screen -->
-        <canvas id="snake" class="wrap" width="320" height="320" tabindex="1"></canvas>
+        <canvas id="snake" class="wrap" width="500" height="500" tabindex="1"></canvas>
         <!-- Settings Screen -->
         <div id="setting" class="py-4 text-light">
-            <p>Settings Screen, press <span style="background-color: #FFFFFF; color: #000000">space</span> to go back to playing</p>
+            <p>Settings Screen, press <span style="background-color: #88bc4c; color: #000000">space</span> to go back to playing</p>
             <a id="new_game2" class="link-alert">new game</a>
             <br>
             <p>Speed:
-                <input id="speed1" type="radio" name="speed" value="120" checked/>
-                <label for="speed1">Slow</label>
-                <input id="speed2" type="radio" name="speed" value="75"/>
-                <label for="speed2">Normal</label>
-                <input id="speed3" type="radio" name="speed" value="35"/>
-                <label for="speed3">Fast</label>
+                <input id="speed1" type="radio" name="speed" value="110" checked/>
+                <label for="speed1">Slow  </label>
+                <input id="speed2" type="radio" name="speed" value="80"/>
+                <label for="speed2">Medium  </label>
+                <input id="speed3" type="radio" name="speed" value="40"/>
+                <label for="speed3">Fast  </label>
+                <input id="speed4" type="radio" name="speed" value="30"/>
+                <label for="speed4">Very Fast  </label>
+                <input id="speed5" type="radio" name="speed" value="19"/>
+                <label for="speed5">Impossible</label>
             </p>
             <p>Wall:
                 <input id="wallon" type="radio" name="wall" value="1" checked/>
@@ -225,6 +235,7 @@ permalink: /snake/
                 case 1: _x++; break;
                 case 2: _y++; break;
                 case 3: _x--; break;
+
             }
             snake.pop(); // tail is removed
             snake.unshift({x: _x, y: _y}); // head is new in new position/orientation
@@ -267,9 +278,9 @@ permalink: /snake/
                 addFood();
                 activeDot(food.x, food.y);
             }
-            // Repaint canvas
+            // Repaint canvas with a dark background
             ctx.beginPath();
-            ctx.fillStyle = "royalblue";
+            ctx.fillStyle = "#1a1a1a"; // Dark background
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             // Paint snake
             for(let i = 0; i < snake.length; i++){
@@ -308,19 +319,19 @@ permalink: /snake/
         let changeDir = function(key){
             // test key and switch direction
             switch(key) {
-                case 37:    // left arrow
+                case 65:    // left arrow
                     if (snake_dir !== 1)    // not right
                         snake_next_dir = 3; // then switch left
                     break;
-                case 38:    // up arrow
+                case 87:    // up arrow
                     if (snake_dir !== 2)    // not down
                         snake_next_dir = 0; // then switch up
                     break;
-                case 39:    // right arrow
+                case 68:    // right arrow
                     if (snake_dir !== 3)    // not left
                         snake_next_dir = 1; // then switch right
                     break;
-                case 40:    // down arrow
+                case 83:    // down arrow
                     if (snake_dir !== 0)    // not up
                         snake_next_dir = 2; // then switch down
                     break;
@@ -328,12 +339,13 @@ permalink: /snake/
         }
         /* Dot for Food or Snake part */
         /////////////////////////////////////////////////////////////
+        // Snake color will be white
         let activeDot = function(x, y){
-            ctx.fillStyle = "#FFFFFF";
+            ctx.fillStyle = "#ffffff"; // White color for snake to contrast with background
             ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
         }
-        /* Random food placement */
-        /////////////////////////////////////////////////////////////
+
+        // Update the apple color to be #88bc4c
         let addFood = function(){
             food.x = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
             food.y = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));
@@ -342,7 +354,10 @@ permalink: /snake/
                     addFood();
                 }
             }
+            ctx.fillStyle = "#88bc4c"; // Color of the apple
+            activeDot(food.x, food.y);
         }
+
         /* Collision Detection */
         /////////////////////////////////////////////////////////////
         let checkBlock = function(x, y, _x, _y){
@@ -364,8 +379,8 @@ permalink: /snake/
         /////////////////////////////////////////////////////////////
         let setWall = function(wall_value){
             wall = wall_value;
-            if(wall === 0){screen_snake.style.borderColor = "#606060";}
-            if(wall === 1){screen_snake.style.borderColor = "#FFFFFF";}
+            if(wall === 0){screen_snake.style.borderColor = "#88bc4c";}
+            if(wall === 1){screen_snake.style.borderColor = "#88bc4c";}
         }
     })();
 </script>

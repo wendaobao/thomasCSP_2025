@@ -321,13 +321,13 @@ hide: true
   <div class="dropdown-content">
     <a id="top" href="https://wendaobao.github.io/thomasCSP_2025/2024/09/09/hackstool_IPYNB_2_.html">Hack #1</a>
     <div class="submenu">
-        <a id="middle" href="https://dakshag001.github.io/dakshaggCSP_2025/2024/08/21/sprint1_plan_IPYNB_2_.html">Sprint 1 Main Objectives &nbsp; :arrow_forward:</a>
+        <a id="middle" href="http://127.0.0.1:4100/thomasCSP_2025/2024/08/21/sprint1_plan_IPYNB_2_.html">Sprint 1 Main Objectives &nbsp; :arrow_forward:</a>
         <div class="submenu-content">
-            <a href="https://www.youtube.com/watch?v=oHg5SJYRHA0">Attempts</a>
-            <a href="https://www.youtube.com/watch?v=oHg5SJYRHA0">Finalized Project stuff</a>
+            <a href="http://127.0.0.1:4100/thomasCSP_2025/snake/">Snake game</a>
+            <a href="http://127.0.0.1:4100/thomasCSP_2025/calculator/">Calculator</a>
         </div>
     </div>
-    <a id="bottom" href="http://127.0.0.1:4100/thomasCSP_2025/">About Pages</a>
+    <a id="bottom" href="http://127.0.0.1:4100/thomasCSP_2025/about/">About Pages</a>
   </div>
 </div>
 
@@ -367,7 +367,7 @@ hide: true
   <button class="fancy-button">Link to Del Norte Bell Schedule Page</button>
 </a>
 
-<a href="">
+<a href="http://127.0.0.1:4100/thomasCSP_2025/snake/">
   <button class="fancy-button">Snake game</button>
 </a>
 
