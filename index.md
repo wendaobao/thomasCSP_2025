@@ -319,7 +319,7 @@ hide: true
 <div class="paste-button">
   <button class="button">Menu &nbsp; ▼</button>
   <div class="dropdown-content">
-    <a id="top" href="https://dakshag001.github.io/dakshaggCSP_2025/2024/09/05/Hacks-1_IPYNB_2_.html">Hack #1</a>
+    <a id="top" href="https://wendaobao.github.io/thomasCSP_2025/2024/09/09/hackstool_IPYNB_2_.html">Hack #1</a>
     <div class="submenu">
         <a id="middle" href="https://dakshag001.github.io/dakshaggCSP_2025/2024/08/21/sprint1_plan_IPYNB_2_.html">Sprint 1 Main Objectives &nbsp; :arrow_forward:</a>
         <div class="submenu-content">
@@ -327,7 +327,7 @@ hide: true
             <a href="https://www.youtube.com/watch?v=oHg5SJYRHA0">Finalized Project stuff</a>
         </div>
     </div>
-    <a id="bottom" href="http://127.0.0.1:4100/dakshaggCSP_2025/about/">About Pages</a>
+    <a id="bottom" href="http://127.0.0.1:4100/thomasCSP_2025/">About Pages</a>
   </div>
 </div>
 
@@ -367,6 +367,8 @@ hide: true
   <button class="fancy-button">Link to Del Norte Bell Schedule Page</button>
 </a>
 
-
+<a href="">
+  <button class="fancy-button">Snake game</button>
+</a>
 
 
