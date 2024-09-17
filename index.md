@@ -325,6 +325,7 @@ hide: true
         <div class="submenu-content">
             <a href="http://127.0.0.1:4100/thomasCSP_2025/snake/">Snake game</a>
             <a href="http://127.0.0.1:4100/thomasCSP_2025/calculator/">Calculator</a>
+            <a href="http://127.0.0.1:4100/thomasCSP_2025/cookieclicker/">Cookie Clicker Game</a>
         </div>
     </div>
     <a id="bottom" href="http://127.0.0.1:4100/thomasCSP_2025/about/">About Pages</a>
