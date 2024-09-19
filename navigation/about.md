@@ -7,11 +7,7 @@ comments: True
 ---
 
 ## About me
-<p>Hello, my name is Thomas</p>
-<ul>
-    <li>- I am a junior currently.</li>
-</ul>
-
+<p>👋 Hello, my name is Thomas</p>
 <ul style="text-align: center; list-style-type: none; padding: 0;">
     <li>🇨🇳 <strong>Nationality:</strong> Chinese</li>
     <li>🎂 <strong>Age:</strong> 17 years old</li>
@@ -19,29 +15,28 @@ comments: True
     <li>🌍 <strong>Location:</strong> San Diego, California</li>
 </ul>
 
+## 🎒 Current Schedule
 
-- This is my current schedule
+Here is my current class schedule:
 
-    - AP Stats
-    - Physics 
-    - AP Bio
-    - AP CSP
-    - American Lit
+- 🧮 AP Stats
+- ⚛️ Physics 
+- 🧬 AP Bio
+- 💻 AP CSP
+- 📚 American Lit
 
-## Academic Goals
+## 📚 Academic Goals
 
 I wish I can find my interest and earn good grades in this school year. 
-<img src="https://www.lexercise.com/wp-content/uploads/2014/10/good-grades.png" alt="Description of image" width="300">
+<img src="https://www.lexercise.com/wp-content/uploads/2014/10/good-grades.png" alt="Good grades" width="300">
 
+## 🎧 Fun Facts
 
-## Fun Facts
-
-- I love listening to music and making my own beats
-    - Favorite genral genres is R&B
-- I like swimming and mountain biking
-- I have a shoe collection
-- I also play the guitar
-
+- I love listening to music and making my own beats 🎶
+    - Favorite genre is R&B 🎤
+- I like swimming 🏊‍♂️ and mountain biking 🚵‍♂️
+- I have a shoe collection 👟
+- I also play the guitar 🎸
 
 <div style="display: flex; gap: 10px;">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvceGF2aZ0nR-7P03le_D27hjWo6s1Rrutlw&s" 
@@ -53,9 +48,7 @@ I wish I can find my interest and earn good grades in this school year.
          style="width: 300px;">
 </div>
 
-
-
-## Favorite Quote
+## 💬 Favorite Quote
 
 <blockquote>
   "Success is not final, failure is not fatal: It is the courage to continue that counts."
