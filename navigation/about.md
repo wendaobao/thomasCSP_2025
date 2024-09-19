@@ -1,8 +1,8 @@
 ---
-layout: page
+layout: post
 title: About
 permalink: /about/
-comment: true
+comment: True
 ---
 
 
