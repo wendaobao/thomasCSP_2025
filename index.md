@@ -323,12 +323,12 @@ hide: true
     <div class="submenu">
         <a id="middle" href="http://127.0.0.1:4100/thomasCSP_2025/2024/08/21/sprint1_plan_IPYNB_2_.html">Sprint 1 Main Objectives &nbsp; :arrow_forward:</a>
         <div class="submenu-content">
-            <a href="http://127.0.0.1:4100/thomasCSP_2025/snake/">Snake game</a>
-            <a href="http://127.0.0.1:4100/thomasCSP_2025/calculator/">Calculator</a>
-            <a href="http://127.0.0.1:4100/thomasCSP_2025/cookieclicker/">Cookie Clicker Game</a>
+            <a href="https://wendaobao.github.io/thomasCSP_2025/snake/">Snake game</a>
+            <a href="https://wendaobao.github.io/thomasCSP_2025/calculator/">Calculator</a>
+            <a href="https://wendaobao.github.io/thomasCSP_2025/cookieclicker/">Cookie Clicker Game</a>
         </div>
     </div>
-    <a id="bottom" href="http://127.0.0.1:4100/thomasCSP_2025/about/">About Pages</a>
+    <a id="bottom" href="https://wendaobao.github.io/thomasCSP_2025/about/">About Pages</a>
   </div>
 </div>
 
