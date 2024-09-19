@@ -2,13 +2,24 @@
 layout: post
 title: About
 permalink: /about/
-comment: True
+toc: True
+comments: True
 ---
 
 
-## About me...
-Hello, my name is Thomas
-- I am a junior currently.
+<h2>About Me...</h2>
+<p>Hello, my name is Thomas</p>
+<ul>
+    <li>- I am a junior currently.</li>
+</ul>
+
+<ul style="text-align: center; list-style-type: none; padding: 0;">
+    <li>🇨🇳 <strong>Nationality:</strong> Chinese</li>
+    <li>🎂 <strong>Age:</strong> 15 years old</li>
+    <li>🎓 <strong>Education:</strong> Sophomore at Del Norte High School</li>
+    <li>🌍 <strong>Location:</strong> California, USA</li>
+</ul>
+
 
 - This is my current schedule
 
@@ -47,3 +58,7 @@ I wish I can find my interest and earn good grades in this school year.
 
 ## Favorite Quote
 
+<blockquote>
+  "Success is not final, failure is not fatal: It is the courage to continue that counts."
+  <footer>– <cite>Winston Churchill</cite></footer>
+</blockquote>
