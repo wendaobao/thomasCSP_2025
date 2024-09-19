@@ -6,8 +6,7 @@ toc: True
 comments: True
 ---
 
-
-<h2>About Me...</h2>
+## About me
 <p>Hello, my name is Thomas</p>
 <ul>
     <li>- I am a junior currently.</li>
@@ -15,9 +14,9 @@ comments: True
 
 <ul style="text-align: center; list-style-type: none; padding: 0;">
     <li>🇨🇳 <strong>Nationality:</strong> Chinese</li>
-    <li>🎂 <strong>Age:</strong> 15 years old</li>
-    <li>🎓 <strong>Education:</strong> Sophomore at Del Norte High School</li>
-    <li>🌍 <strong>Location:</strong> California, USA</li>
+    <li>🎂 <strong>Age:</strong> 17 years old</li>
+    <li>🎓 <strong>Education:</strong> Junior at Del Norte High School</li>
+    <li>🌍 <strong>Location:</strong> San Diego, California</li>
 </ul>
 
 
