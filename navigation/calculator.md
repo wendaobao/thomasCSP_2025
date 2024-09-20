@@ -1,491 +1,177 @@
 ---
-layout: page
+layout: post
+categories: [Hacks]
+title: Calculator
+description:  Calculator
+type: issues 
 permalink: /calculator/
-toc: true
-comments: false
+comments: true
+hide: true
 ---
 
-<!-- 
-Updated calculator design with improved CSS for a modern look.
--->
+<html>
+<head>
+    <title>JavaScript Calculator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"
+        integrity="sha512-iphNRh6dPbeuPGIrQbCdbBF/qcqadKWLa35YPVfMZMHBSI6PLJh1om2xCTWhpVpmUyb4IvVS9iYnnYMkleVXLA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border: 1px solid #333;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        input[type="button"] {
+            width: 100%;
+            padding: 20px;
+            background-color: #4CAF50; /* The Base color.... not working... */
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        input[type="button"]:hover {
+            box-shadow: 0 0 10px #88bc4c; /* This is the Glow effect */
+            background-color: #88bc4c; /* The Darker green for hovering the button */
+        }
+        input[type="text"] {
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            border: 2px solid #333;
+            text-align: right;
+            background-color: #fff;
+        }
+        #history {
+            border: 1px solid #333;
+            margin: 20px auto;
+            padding: 10px;
+            width: 80%;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        #history p {
+            margin: 5px 0;
+            font-size: 18px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            color: #6e9a41; /* The Darker green text color */
+        }
+        #history p:last-child {
+            border-bottom: none;
+        }
+        #history p::before {
+            content: "✓ ";
+            color: #88bc4c; /* Green checkmark */
+        }
+    </style>
+</head>
+<body>
+    <table id="calcu">
+        <tr>
+            <td colspan="4"><input type="text" id="result" readonly></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="c" onclick="clr()"></td>
+            <td><input type="button" value="√" onclick="dis('sqrt(')"></td>
+            <td><input type="button" value="%" onclick="dis('%')"></td>
+            <td><input type="button" value="^" onclick="dis('^')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="1" onclick="dis('1')"></td>
+            <td><input type="button" value="2" onclick="dis('2')"></td>
+            <td><input type="button" value="3" onclick="dis('3')"></td>
+            <td><input type="button" value="/" onclick="dis('/')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" onclick="dis('4')"></td>
+            <td><input type="button" value="5" onclick="dis('5')"></td>
+            <td><input type="button" value="6" onclick="dis('6')"></td>
+            <td><input type="button" value="*" onclick="dis('*')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" onclick="dis('7')"></td>
+            <td><input type="button" value="8" onclick="dis('8')"></td>
+            <td><input type="button" value="9" onclick="dis('9')"></td>
+            <td><input type="button" value="-" onclick="dis('-')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="0" onclick="dis('0')"></td>
+            <td><input type="button" value="." onclick="dis('.')"></td>
+            <td><input type="button" value="=" onclick="solve()"></td>
+            <td><input type="button" value="+" onclick="dis('+')"></td>
+        </tr>
+    </table>
+    <!-- Here's teh History Section -->
+    <div id="history"></div>
+    <script>
+        // This is the function that displays clicked value in the input field
+        function dis(val) {
+            document.getElementById("result").value += val;
+        }
+        // Function to handle keyboard input
+        function myFunction(event) {
+            // This will only allow numbers and basic operators
+            if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '^', '%'].includes(event.key)) {
+                document.getElementById("result").value += event.key;
+            }
+            // If I pressed Enter, it will calculate the result
+            if (event.key === 'Enter') {
+                solve();
+            }
+        }
+        // Function to evaluate and solve the expression
+        function solve() {
+            let x = document.getElementById("result").value;
+            // Replace ^ with ** for exponentiation (math.js uses ** for powers...)
+            x = x.replace(/\^/g, '**');
+            // Replace sqrt( with math.sqrt( for square roots
+            x = x.replace(/sqrt\(/g, 'math.sqrt(');
+            try {
+                // Evaluate the expression using math.js
+                let y = math.evaluate(x);
+                document.getElementById("result").value = y;
+                // Adding the calculation to history
+                addHistory(x + ' = ' + y);
+            } catch (error) {
+                // If there's an error in evaluation, it will display "Error"
+                document.getElementById("result").value = "Error";
+            }
+        }
+        // The function that clears the display
+        function clr() {
+            document.getElementById("result").value = "";
+        }
+        // The function that adds the calculation to history below the calculator
+        function addHistory(entry) {
+            let historyDiv = document.getElementById("history");
+            let p = document.createElement("p");
+            p.textContent = entry;
+            historyDiv.appendChild(p);
+            historyDiv.scrollTop = historyDiv.scrollHeight; // Scrolls to the bottom
+        }
+        // Allowing the "enter" key on keyboard also triggers the calculation
+        var cal = document.getElementById("calcu");
+        cal.onkeyup = function (event) {
+            if (event.keyCode === 13) {
+                solve();
+            }
+        }
+    </script>
 
-<!-- 
-HTML implementation of the calculator.
--->
-
-<!-- 
-    Style and Action are aligned with HTML class definitions.
-    style.css contains the majority of style definitions (number, operation, clear, and equals)
-    - The div calculator container sets 4 elements to a row.
-    The background is credited to Vanta JS and is implemented at the bottom of this page.
--->
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #f0f0f0;
-    margin: 0;
-  }
-  #animation {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  .calculator-container {
-    display: grid;
-    grid-template-columns: repeat(4, 80px);
-    grid-gap: 10px;
-    background: #333;
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .calculator-output {
-    grid-column: span 4;
-    background: #222;
-    color: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    font-size: 24px;
-    text-align: right;
-    border: 2px solid #444;
-  }
-  .calculator-number, .calculator-operation, .calculator-clear, .calculator-equals {
-    background: #444;
-    color: #fff;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .calculator-number:hover, .calculator-operation:hover, .calculator-clear:hover, .calculator-equals:hover {
-    background: #555;
-  }
-  .calculator-clear {
-    grid-column: span 2;
-    background: #e74c3c;
-  }
-  .calculator-equals {
-    grid-column: span 2;
-    background: #2ecc71;
-  }
-</style>
-
-<!-- Add a container for the animation -->
-<div id="animation">
-  <div class="calculator-container">
-    <!-- result -->
-    <div class="calculator-output" id="output">0</div>
-    <!-- row 1 -->
-    <div class="calculator-number">1</div>
-    <div class="calculator-number">2</div>
-    <div class="calculator-number">3</div>
-    <div class="calculator-operation">+</div>
-    <!-- row 2 -->
-    <div class="calculator-number">4</div>
-    <div class="calculator-number">5</div>
-    <div class="calculator-number">6</div>
-    <div class="calculator-operation">-</div>
-    <!-- row 3 -->
-    <div class="calculator-number">7</div>
-    <div class="calculator-number">8</div>
-    <div class="calculator-number">9</div>
-    <div class="calculator-operation">*</div>
-    <!-- row 4 -->
-    <div class="calculator-clear">A/C</div>
-    <div class="calculator-number">0</div>
-    <div class="calculator-number">.</div>
-    <div class="calculator-equals">=</div>
-  </div>
-</div>
-
-<!-- JavaScript (JS) implementation of the calculator. -->
-<script>
-// Initialize important variables to manage calculations
-var firstNumber = null;
-var operator = null;
-var nextReady = true;
-
-// Build objects containing key elements
-const output = document.getElementById("output");
-const numbers = document.querySelectorAll(".calculator-number");
-const operations = document.querySelectorAll(".calculator-operation");
-const clear = document.querySelectorAll(".calculator-clear");
-const equals = document.querySelectorAll(".calculator-equals");
-
-// Number buttons listener
-numbers.forEach(button => {
-  button.addEventListener("click", function() {
-    number(button.textContent);
-  });
-});
-
-// Number action
-function number(value) {
-  if (value != ".") {
-    if (nextReady == true) {
-      output.innerHTML = value;
-      if (value != "0") {
-        nextReady = false;
-      }
-    } else {
-      output.innerHTML = output.innerHTML + value;
-    }
-  } else {
-    if (output.innerHTML.indexOf(".") == -1) {
-      output.innerHTML = output.innerHTML + value;
-      nextReady = false;
-    }
-  }
-}
-
-// Operation buttons listener
-operations.forEach(button => {
-  button.addEventListener("click", function() {
-    operation(button.textContent);
-  });
-});
-
-// Operator action
-function operation(choice) {
-  if (firstNumber == null) {
-    firstNumber = parseInt(output.innerHTML);
-    nextReady = true;
-    operator = choice;
-    return;
-  }
-  firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
-  operator = choice;
-  output.innerHTML = firstNumber.toString();
-  nextReady = true;
-}
-
-// Calculator
-function calculate(first, second) {
-  let result = 0;
-  switch (operator) {
-    case "+":
-      result = first + second;
-      break;
-    case "-":
-      result = first - second;
-      break;
-    case "*":
-      result = first * second;
-      break;
-    case "/":
-      result = first / second;
-      break;
-    default:
-      break;
-  }
-  return result;
-}
-
-// Equals button listener
-equals.forEach(button => {
-  button.addEventListener("click", function() {
-    equal();
-  });
-});
-
-// Equal action
-function equal() {
-  firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
-  output.innerHTML = firstNumber.toString();
-  nextReady = true;
-}
-
-// Clear button listener
-clear.forEach(button => {
-  button.addEventListener("click", function() {
-    clearCalc();
-  });
-});
-
-// A/C action
-function clearCalc() {
-  firstNumber = null;
-  output.innerHTML = "0";
-  nextReady = true;
-}
-</script>
-
-<!-- 
-Vanta animations just for fun, load JS onto the page
--->
-<script src="{{site.baseurl}}/assets/js/three.r119.min.js"></script>
-<script src="{{site.baseurl}}/assets/js/vanta.halo.min.js"></script>
-<script src="{{site.baseurl}}/assets/js/vanta.birds.min.js"></script>
-<script src="{{site.baseurl}}/assets/js/vanta.net.min.js"></script>
-<script src="{{site.baseurl}}/assets/js/vanta.rings.min.js"></script>
-
-<script>
-// Setup Vanta scripts as functions
-var vantaInstances = {
-  halo: VANTA.HALO,
-  birds: VANTA.BIRDS,
-  net: VANTA.NET,
-  rings: VANTA.RINGS
-};
-
-// Obtain a random Vanta function
-var vantaInstance = vantaInstances[Object.keys(vantaInstances)[Math.floor(Math.random() * Object.keys(vantaInstances).length)]];
-
-// Run the animation
-vantaInstance({
-  el: "#animation",
-  mouseControls: true,
-  touchControls: true,
-  gyroControls: false
-});
-</script>
-
-<style>
-  /* Existing styles */
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #f0f0f0;
-    margin: 0;
-  }
-  #animation {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  .calculator-container {
-    display: grid;
-    grid-template-columns: repeat(4, 80px);
-    grid-gap: 10px;
-    background: #333;
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .calculator-output {
-    grid-column: span 4;
-    background: #222;
-    color: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    font-size: 24px;
-    text-align: right;
-    border: 2px solid #444;
-  }
-  .calculator-number, .calculator-operation, .calculator-clear, .calculator-equals {
-    background: #444;
-    color: #fff;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .calculator-number:hover, .calculator-operation:hover, .calculator-clear:hover, .calculator-equals:hover {
-    background: #555;
-  }
-  .calculator-clear {
-    grid-column: span 2;
-    background: #e74c3c;
-  }
-  .calculator-equals {
-    grid-column: span 2;
-    background: #2ecc71;
-  }
-  .calculator-sqrt, .calculator-percent {
-    background: #3498db;
-    color: #fff;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .calculator-sqrt:hover, .calculator-percent:hover {
-    background: #2980b9;
-  }
-</style>
-
-<!-- Add a container for the animation -->
-<div id="animation">
-  <div class="calculator-container">
-    <!-- result -->
-    <div class="calculator-output" id="output">0</div>
-    
-    <!-- row 1 -->
-    <div class="calculator-number">1</div>
-    <div class="calculator-number">2</div>
-    <div class="calculator-number">3</div>
-    <div class="calculator-operation">+</div>
-    
-    <!-- row 2 -->
-    <div class="calculator-number">4</div>
-    <div class="calculator-number">5</div>
-    <div class="calculator-number">6</div>
-    <div class="calculator-operation">-</div>
-    
-    <!-- row 3 -->
-    <div class="calculator-number">7</div>
-    <div class="calculator-number">8</div>
-    <div class="calculator-number">9</div>
-    <div class="calculator-operation">*</div>
-    
-    <!-- row 4 -->
-    <div class="calculator-clear">A/C</div>
-    <div class="calculator-number">0</div>
-    <div class="calculator-number">.</div>
-    <div class="calculator-equals">=</div>
-    
-    <!-- New row for additional functions -->
-    <div class="calculator-sqrt">√</div>
-    <div class="calculator-percent">%</div>
-  </div>
-</div>
-
-<!-- JavaScript (JS) implementation of the calculator. -->
-<script>
-// Initialize important variables to manage calculations
-var firstNumber = null;
-var operator = null;
-var nextReady = true;
-
-// Build objects containing key elements
-const output = document.getElementById("output");
-const numbers = document.querySelectorAll(".calculator-number");
-const operations = document.querySelectorAll(".calculator-operation");
-const clear = document.querySelectorAll(".calculator-clear");
-const equals = document.querySelectorAll(".calculator-equals");
-const sqrtButton = document.querySelector(".calculator-sqrt");
-const percentButton = document.querySelector(".calculator-percent");
-
-// Number buttons listener
-numbers.forEach(button => {
-  button.addEventListener("click", function() {
-    number(button.textContent);
-  });
-});
-
-// Number action
-function number(value) {
-  if (value != ".") {
-    if (nextReady == true) {
-      output.innerHTML = value;
-      if (value != "0") {
-        nextReady = false;
-      }
-    } else {
-      output.innerHTML = output.innerHTML + value;
-    }
-  } else {
-    if (output.innerHTML.indexOf(".") == -1) {
-      output.innerHTML = output.innerHTML + value;
-      nextReady = false;
-    }
-  }
-}
-
-// Operation buttons listener
-operations.forEach(button => {
-  button.addEventListener("click", function() {
-    operation(button.textContent);
-  });
-});
-
-// Operator action
-function operation(choice) {
-  if (firstNumber == null) {
-    firstNumber = parseInt(output.innerHTML);
-    nextReady = true;
-    operator = choice;
-    return;
-  }
-  firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
-  operator = choice;
-  output.innerHTML = firstNumber.toString();
-  nextReady = true;
-}
-
-// Calculator
-function calculate(first, second) {
-  let result = 0;
-  switch (operator) {
-    case "+":
-      result = first + second;
-      break;
-    case "-":
-      result = first - second;
-      break;
-    case "*":
-      result = first * second;
-      break;
-    case "/":
-      result = first / second;
-      break;
-    default:
-      break;
-  }
-  return result;
-}
-
-// Equals button listener
-equals.forEach(button => {
-  button.addEventListener("click", function() {
-    equal();
-  });
-});
-
-// Equal action
-function equal() {
-  firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
-  output.innerHTML = firstNumber.toString();
-  nextReady = true;
-}
-
-// Clear button listener
-clear.forEach(button => {
-  button.addEventListener("click", function() {
-    clearCalc();
-  });
-});
-
-// A/C action
-function clearCalc() {
-  firstNumber = null;
-  output.innerHTML = "0";
-  nextReady = true;
-}
-
-// Square Root function listener
-sqrtButton.addEventListener("click", function() {
-  const currentNumber = parseFloat(output.innerHTML);
-  output.innerHTML = Math.sqrt(currentNumber).toString();
-  nextReady = true;
-});
-
-// Percentage function listener
-percentButton.addEventListener("click", function() {
-  const currentNumber = parseFloat(output.innerHTML);
-  output.innerHTML = (currentNumber / 100).toString();
-  nextReady = true;
-});
-</script>
+</body>
+</html>
