@@ -38,14 +38,14 @@ I wish I can find my interest and earn good grades in this school year.
 - I have a shoe collection 👟
 - I also play the guitar 🎸
 
-<div style="display: flex; gap: 10px;">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvceGF2aZ0nR-7P03le_D27hjWo6s1Rrutlw&s" 
-         alt="My favorite artist" 
-         style="width: 300px;">
-    
+<div>
     <img src="https://t4.ftcdn.net/jpg/03/80/27/77/240_F_380277759_TyJdfn5MTNfFYsH6u7PWe4P7BRfSoFd7.jpg" 
          alt="mountain biking" 
          style="width: 300px;">
+    
+    <img src="https://i.ibb.co/W06bVvY/IMG-8982.jpg" 
+         alt="Image description" 
+         style="width: 150px;">
 </div>
 
 ## 💬 Favorite Quote
