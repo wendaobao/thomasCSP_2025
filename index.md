@@ -319,13 +319,14 @@ hide: true
 <div class="paste-button">
   <button class="button">Menu &nbsp; ▼</button>
   <div class="dropdown-content">
-    <a id="top" href="https://wendaobao.github.io/thomasCSP_2025/2024/09/09/hackstool_IPYNB_2_.html">Hack #1</a>
+    <a id="top" href="https://wendaobao.github.io/thomasCSP_2025/2024/09/09/hackstool_IPYNB_2_.html">Jupyter Notebook</a>
     <div class="submenu">
-        <a id="middle" href="http://127.0.0.1:4100/thomasCSP_2025/2024/08/21/sprint1_plan_IPYNB_2_.html">Sprint 1 Main Objectives &nbsp; :arrow_forward:</a>
+        <a id="middle" href="http://127.0.0.1:4100/thomasCSP_2025/2024/08/21/sprint1_plan_IPYNB_2_.html">Sprint 1 Main Objectives &nbsp;</a>
         <div class="submenu-content">
             <a href="https://wendaobao.github.io/thomasCSP_2025/snake/">Snake game</a>
             <a href="https://wendaobao.github.io/thomasCSP_2025/calculator/">Calculator</a>
             <a href="https://wendaobao.github.io/thomasCSP_2025/cookieclicker/">Cookie Clicker Game</a>
+            <a href="https://wendaobao.github.io/thomasCSP_2025/randomnumber/">Random Number Generator</a>
         </div>
     </div>
     <a id="bottom" href="https://wendaobao.github.io/thomasCSP_2025/about/">About Pages</a>
@@ -368,7 +369,7 @@ hide: true
   <button class="fancy-button">Link to Del Norte Bell Schedule Page</button>
 </a>
 
-<a href="http://127.0.0.1:4100/thomasCSP_2025/snake/">
+<a href="https://wendaobao.github.io/thomasCSP_2025/snake/">
   <button class="fancy-button">Snake game</button>
 </a>
 
