@@ -1,8 +1,8 @@
 ---
-layout: default
+layout: schedule
+title: Calendar
+units: "1,2,3,4,5,6,7,8,9"
+search_exclude: true
+course: csp
+menu: nav/home.html
 ---
-
-<div class="schedule-content">
-  <h1>{{ page.title }}</h1>
-  {{ content }}
-</div>
