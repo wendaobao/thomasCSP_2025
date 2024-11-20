@@ -400,7 +400,7 @@ hide: true
   <button class="fancy-button">Link to Del Norte Bell Schedule Page</button>
 </a>
 
-<a href="">
+<a href="https://nighthawkcoders.github.io/portfolio_2025/csp/big-idea/p4/3-2/">
   <button class="fancy-button">Link to Sprint 2 teachings</button>
 </a>
 
