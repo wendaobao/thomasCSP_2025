@@ -7,7 +7,7 @@
 The purpose of our group program is to build a website that will allow users to share their thoughts, stories, and experiences on cars through various features.
 
 ## **Purpose of My Individual Feature**
-My individual feature focuses on developing a real time chat for users to communicate with each other
+The Car Chat feature in our project allows users to engage in real-time conversations about cars. Users can send, update, and delete messages while ensuring authentication and security through JWT-based authorization. This feature is built using Flask, SQLAlchemy, and RESTful APIs to provide an interactive chat experience.
 
 ## **CPT Requirement Highlights**
 
