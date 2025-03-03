@@ -14,8 +14,6 @@
 ![Description](https://i.postimg.cc/3RHFbLsv/Screenshot-2025-03-02-at-2-28-50-PM.png)
 
 ## 5: I helped my group maintain organized by keeping our Kanban board on track as well as keeping it up to date. 
-![Description](https://i.postimg.cc/g0pQh7KN/Screenshot-2025-03-02-at-8-03-52-PM.png
-
-)
+![Description](https://i.postimg.cc/g0pQh7KN/Screenshot-2025-03-02-at-8-03-52-PM.png)
 
 ## Extra stuff I did: At the N@tm where I interviewed some groups and gave feedback on other groups. Such as the my friends group who worked on creating a multiplayer drawing and guessing game orgnianlly inspired by Scribble.io. I thought this was an interesting website as it was sort of like a game and users could interact and compete for fun with friends.
