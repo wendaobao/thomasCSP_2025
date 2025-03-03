@@ -2,62 +2,60 @@
 
 ---
 
-## Sprint 4 individual blog
-
-
-
 
 ## **Purpose of Our Group's Program**
 The purpose of our group program is to build a website that will allow users to share their thoughts, stories, and experiences on cars through various features.
 
 ## **Purpose of My Individual Feature**
-My individual feature focuses on developing a chat function for users to communitcate with eachother.
+My individual feature focuses on developing a real time chat for users to communicate with each other
 
+## **CPT Requirement Highlights**
 
-## **Using db_init, db_restore, db_backup**
-- **Data Creation**: Use `db_init` to set up the initial database with test data. ./scripts/db_init.py
-- **Data Recovery**: Use `db_restore` to recover data from backup
-- **Data Backup**: Use `db_backup` 
+This project aligns with College Board CPT (Create Performance Task) requirements by demonstrating:
 
+1. Program Purpose & Function
 
-- **Frontend Interaction**: Users can input messages through a text field in the chat interface. When they submit the form, a POST request is sent to the API to create a new message.
-  - **Code Reference**: 
-    ```javascript
-    async function sendMessage(message) {
-        const messageData = {
-            "message": message,
-            "user_id": 1  // Using the same user_id as shown in Postman
-        };
+The Car Chat Feature enables user interaction through a structured messaging system, allowing real-time discussions on car-related topics.
 
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(messageData)
-        });
-    }
-    ```
+Users can create, update, and delete messages, ensuring full CRUD functionality.
 
+2. Algorithm Implementation
 
-## **Formatting Response Data (JSON) from API into DOM**
-- In the `displayMessage` function:
-    ```javascript
-    function displayMessage({ text, type, time, userId, id }) {
-        const messageDiv = document.createElement('div');
-        messageDiv.innerHTML = `
-            <div class="message-header">
-                <span class="user-id">${userId}</span>
-                <span class="timestamp">${timeString}</span>
-            </div>
-            <div class="message-text">${text}</div>
-        `;
-        chatBox.appendChild(messageDiv);
-    }
-    ```
+The backend processes API requests with Flask, handling user authentication, message storage, and updates.
+
+User messages are processed through functions that validate input, update databases, and return JSON responses.
+
+3. Data Abstraction
+
+Messages are stored in a structured SQL database using SQLAlchemy models, ensuring organized and retrievable data.
+
+Relationships between users and messages are defined using foreign keys to maintain proper data integrity.
+
+4. Managing Complexity
+
+The program breaks functionality into modular components, including separate models for users and messages.
+
+API routes are well-structured, allowing smooth communication between the frontend and backend.
+
+5. Development Process
+
+The project follows an iterative development process, incorporating debugging, user testing, and real-world API interactions.
+
+Continuous improvements, such as UI enhancements and error handling, demonstrate a structured approach to development..
+
 
 ## **Methods in Class**
 - The `create`, `read`, `update`, and `delete` methods in the `CarChat` model:
+- My backend uses API to handle responses for all the main actions: post, get, put, and delete. When we send a new message, it triggers a function to refresh the page, and then it uses the get method to update the page with the latest data from the backend database. The get method simply updates the chat with the current messages. For the put method, it sends a request to the server, and once the server responds, it updates the the message accordingly to the ID given to each individual message. The delete method removes a row from both the database and the displays. 
+- This fulfills the performance task by having at least one procedure that contributes to the program's intended purpose. For example, 
+    - Procedure Name: create()
+    - Return Type: dict (Returns the stored chat message details in dictionary format) 
+    - Parameters: self (instance of CarChat)
+    - Purpose: Stores a new chat message in the database.
+Ensures that the message is committed and available for retrieval.
+Returns the saved message details for confirmation.
+Handles errors by rolling back changes if insertion fails.
+
     ```python
         def create(self):
         """
@@ -125,29 +123,63 @@ My individual feature focuses on developing a chat function for users to communi
         except Exception as error:
             db.session.rollback()
             raise error
+```
+## **Algorithm Requests**
+The put() method in CarChat contains sequencing, selection, and iteration, making it a valid algorithm for the performance task.
+- Sequencing:
+The method retrieves messages using CarChat.query.all().
+- Selection:
+If no messages exist, it returns an error message.
+- Iteration:
+It iterates over each message using list comprehension [msg.read() for msg in messages].
 
-    ```
+```python
+    class CarChatResource(Resource):  # Renamed to avoid confusion with model
+    def get(self):
+        messages = CarChat.query.all()
+        return [msg.read() for msg in messages], 200
 
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('message', required=True, help="Message cannot be blank")
+        parser.add_argument('user_id', type=int, required=True, help="User ID cannot be blank")
+        args = parser.parse_args()
 
-## **Call to Algorithm Request**
-- The `fetch` call in the frontend JavaScript that sends a PUT request to the `/car_chat/<message_id>` endpoint:
-    ```javascript
-    async function editMessage(id, newMessageContent) {
-        const response = await fetch(`http://127.0.0.1:8887/car_chat/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id, message: newMessageContent })
-        });
-    }
-    ```
+        new_message = CarChat(
+            message=args['message'],
+            user_id=args['user_id']
+        )
+        try:
+            new_message.create()
+            return new_message.read(), 201
+        except Exception as e:
+            return {'error': str(e)}, 400
+    
+        
+    @token_required()  # Ensure the user is authenticated
+    def delete(self):
+        # Obtain the current user
+        current_user = g.current_user
+        # Obtain the request data
+        data = request.get_json()
+        
+        # Find the current message from the database table(s)
+        message = CarChat.query.get(data['id'])
+        
+        if message is None:
+            return jsonify({"error": "Message not found"}), 404
+        
+        # Check if the current user is the owner of the message
+        if message._user_id != current_user.id:
+            return jsonify({"message": "You are not authorized to delete this message"}), 403
+        
+        # Delete the message using the ORM method defined in the model
+        message.delete()
+        
+        # Return response
+        return jsonify({"message": "Message deleted successfully"}), 200
 
-
-## **Changing Datas**
-- How changing data or methods triggers different responses
-  ```python
-  @token_required()  # Ensure the user is authenticated
+  # Ensure the user is authenticated
     def put(self):
         # Obtain the current user
         current_user = g.current_user
@@ -170,17 +202,70 @@ My individual feature focuses on developing a chat function for users to communi
         
         # Return response with updated message data
         return jsonify(message.read()), 200
+```
+
+
+## **Using db_init, db_restore, db_backup**
+- **Data Creation**: Use `db_init` to set up the initial database with test data. ./scripts/db_init.py
+- **Data Recovery**: Use `db_restore` to recover data from backup
+- **Data Backup**: Use `db_backup` 
+
+
+**Frontend Interaction**: Users can input messages through a text field in the chat interface. When they submit the form, a POST request is sent to the API to create a new message.
+  - **Code Reference**: 
+    ```javascript
+    async function sendMessage(message) {
+        const messageData = {
+            "message": message,
+            "user_id": 1  // Using the same user_id as shown in Postman
+        };
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(messageData)
+        });
+    }
+     if (response.ok) {
+                        return await response.json(); // Return the message data including ID
+                    } else {
+                        console.error('Error sending message:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                return null;
+            }
     ```
 
 
+## **Formatting Response Data (JSON) from API into DOM**
+- The displayMessage function formats the response data received from the API (in JSON format) and creates a corresponding HTML structure to display the message in the chat interface. 
+- In the `displayMessage` function:
+    ```javascript
+    function displayMessage({ text, type, time, userId, id }) {
+        const messageDiv = document.createElement('div');
+        messageDiv.innerHTML = `
+            <div class="message-header">
+                <span class="user-id">${userId}</span>
+                <span class="timestamp">${timeString}</span>
+            </div>
+            <div class="message-text">${text}</div>
+        `;
+        chatBox.appendChild(messageDiv);
+    }
+    ```
+  ```
 
-***s
+
+
 
 
 ## **Input/Output Requests**
-### **Demo Ways to Input to Your Full Stack Feature**
 - **Frontend Interaction**: Users can input messages through a text field in the chat interface. When they submit the form, a POST request is sent to the API to create a new message.
-  - **Code Reference**: 
+ 
     ```javascript
     async function sendMessage(message) {
         const messageData = {
@@ -222,12 +307,9 @@ My individual feature focuses on developing a chat function for users to communi
     ```
 
 
-## **Method/Procedure in Class**
-  - **Code Reference**: The `put` method in `CarChatResource` contains sequencing (checking if the message exists), selection (checking user authorization), and iteration,
-
 ## **Parameters and Return Type**
 - parameters (body of the request) and the return type (using `jsonify`) of the function that handles API requests.
-  - **Code Reference**: The `put` method takes a JSON body with the message ID and new content, returning a JSON response:
+- The `put` method takes a JSON body with the message ID and new content, returning a JSON response:
     ```python
     return jsonify(message.read()), 200
     ```
