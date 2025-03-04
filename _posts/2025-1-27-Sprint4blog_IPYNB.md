@@ -19,11 +19,38 @@ The Car Chat Feature enables user interaction through a structured messaging sys
 
 Users can create, update, and delete messages, ensuring full CRUD functionality.
 
+```
+@token_required()  # Ensures only authenticated users can send messages
+def post(self):
+    parser = reqparse.RequestParser()
+    parser.add_argument('message', required=True, help="Message cannot be blank")
+    args = parser.parse_args()
+
+    current_user = g.current_user  # Retrieves the logged-in user
+
+    new_message = carChat(
+        message=args['message'],
+        user_id=current_user.id  # Links message to the user
+    )
+    
+    try:
+        new_message.create()  # Stores the message in the database
+        return new_message.read(), 201
+    except Exception as e:
+        return {'error': str(e)}, 400
+```
+
 2. Algorithm Implementation
 
 The backend processes API requests with Flask, handling user authentication, message storage, and updates.
 
 User messages are processed through functions that validate input, update databases, and return JSON responses.
+
+```
+def get(self):
+    messages = carChat.query.all()  # Fetch all messages from the database
+    return [msg.read() for msg in messages], 200  # Returns JSON response
+```
 
 3. Data Abstraction
 
@@ -31,17 +58,57 @@ Messages are stored in a structured SQL database using SQLAlchemy models, ensuri
 
 Relationships between users and messages are defined using foreign keys to maintain proper data integrity.
 
+```
+class carChat(db.Model):
+    __tablename__ = 'carChats'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    _message = db.Column(db.String(255), nullable=False)
+    _user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))  # Foreign key links message to user
+    _timestamp = db.Column('_timestamp', db.DateTime, default=datetime.utcnow)
+
+    def __init__(self, message, user_id):
+        self._message = message
+        self._user_id = user_id
+        self._timestamp = datetime.utcnow()
+
+    def read(self):
+        """Returns chat message data with user details"""
+        user = User.query.get(self._user_id)
+        return {
+            'id': self.id,
+            'message': self._message,
+            'username': user.name if user else "Unknown User",
+            'timestamp': self._timestamp.isoformat()
+        }
+```
 4. Managing Complexity
 
 The program breaks functionality into modular components, including separate models for users and messages.
 
 API routes are well-structured, allowing smooth communication between the frontend and backend.
 
+```
+carChat_api = Blueprint('carChat_api', __name__, url_prefix='/api')
+api = Api(carChat_api)
+
+api.add_resource(carChatResource, '/carChat')
+```
+
 5. Development Process
 
 The project follows an iterative development process, incorporating debugging, user testing, and real-world API interactions.
 
-Continuous improvements, such as UI enhancements and error handling, demonstrate a structured approach to development..
+Continuous improvements, such as UI enhancements and error handling, demonstrate a structured approach to development.
+
+```
+try:
+    message.delete()
+    return {'message': 'Deleted successfully'}, 200
+except Exception as error:
+    db.session.rollback()  # Prevents database corruption
+    return {'error': str(error)}, 500
+```
 
 
 ## **Methods in Class**
