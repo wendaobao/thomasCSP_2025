@@ -45,3 +45,15 @@ Correct answer is D: For an algorithm to run in reasonable time, it must take a 
 ![Description](https://i.postimg.cc/6Q0LYmtY/Screenshot-2025-03-02-at-9-26-15-PM.png)
 
 C isn't right but D is because:  Since y is initially negative, the loop condition count ≥ y is initially true, so the body of the loop is never executed and 0 is returned.
+
+ Goal: Improve understanding of how conditionals work within loops and functions.
+🔹 Review if-elif-else logic with multiple layers.
+🔹 Practice writing nested conditional functions using real-world problems.
+🔹 Use Code.org, Replit, or LeetCode for conditionals and debugging practice.
+
+
+ Goal: Strengthen ability to design and optimize algorithms.
+🔹 Study Big-O notation basics to understand time complexity.
+🔹 Break down existing solutions to see how they are structured.
+🔹 Write pseudocode before coding to improve logical thinking.
+🔹 Implement and compare different sorting and searching algorithms.
