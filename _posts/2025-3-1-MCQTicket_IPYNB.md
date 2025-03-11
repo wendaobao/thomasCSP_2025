@@ -46,6 +46,8 @@ Correct answer is D: For an algorithm to run in reasonable time, it must take a 
 
 C isn't right but D is because:  Since y is initially negative, the loop condition count ≥ y is initially true, so the body of the loop is never executed and 0 is returned.
 
+Future Plan:
+
  Goal: Improve understanding of how conditionals work within loops and functions.
 🔹 Review if-elif-else logic with multiple layers.
 🔹 Practice writing nested conditional functions using real-world problems.
