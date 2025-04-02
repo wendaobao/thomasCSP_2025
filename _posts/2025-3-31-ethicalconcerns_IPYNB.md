@@ -79,3 +79,14 @@ you may not use this file except in compliance with the License.
 You must include appropriate attribution notices.
 
 Link to CPT project License: https://github.com/wendaobao/thomasCSP_2025/blob/main/LICENSE.md
+
+2020 Questions:
+
+31: C. When the student gets permission from the copyright owner of the application
+51: A. Creative Commons gives creators of digital content the ability to indicate how their works can be legally used and distributed, enabling broad access to digital information.
+59: C. The original developer of open-source software provides free or low-cost support for users installing and running the software.
+
+2018 Questions:
+
+16: D. The user will be in violation of the Digital Millennium Copyright Act (DMCA).
+35: D. Using samples published with a no-rights-reserved Creative Commons license.
